@@ -1,3 +1,16 @@
+## 2026-11-17 22:47 内核控制台上屏（证据）
+
+用带 `--usb` 的 payload 让 loader 停在 USB 命令循环，`oem run` 启动内核后在运行期间用
+`oem screenshot` + `upload` 抓到真实面板画面（`evidence/screen-console-2026-11-17.png`，
+`getvar screen` = 1080x2242，stride 4320）。画面里能看到：
+
+- 完整的 XNU verbose 启动日志（从 zone init 到 `BSD root: md0`）
+- `Hello from user space on Darwin!` / `I am process 1, uid 0, console fd 0.`（临时 ramdisk 的 init）
+- `panic: initproc failed to start`（预期，因为 ramdisk 里不是真的 launchd）
+- 栈回溯与 stackshot 全部画在屏幕上，末尾光标停在屏幕左下角
+
+⇒ 内核 framebuffer / 文本控制台链路在真机上工作正常（这一点此前只有 logdump 才能确认）。
+
 # 当前状态（2026-11-17 22:00 左右）
 
 ## 一句话
