@@ -1,6 +1,6 @@
 # 开源文案（三版，按场合取用）
 
-> 把下面 `<REPO_URL>` 替换成最终仓库地址；文中时间与日志都可复现（见仓库 `evidence/`）。
+> 把下面 `https://github.com/RisanYu/r1-hakios-port` 替换成最终仓库地址；文中时间与日志都可复现（见仓库 `evidence/`）。
 
 ---
 
@@ -27,7 +27,7 @@
 
 接下来要做的：面板初始化让内核日志/图形上屏、Synaptics 触摸、UFS 驱动、iOS 16.5 用户态（复用小米 8 / dipper 的 Mesa + freedreno A630 路线），最后才是图形界面。
 
-**仓库**：`<REPO_URL>`，包含全部脚本、补丁、调试方法与真机日志（已脱敏）。
+**仓库**：`https://github.com/RisanYu/r1-hakios-port`，包含全部脚本、补丁、调试方法与真机日志（已脱敏）。
 **说明**：仓库不含任何 Apple 源码/固件/厂商 ROM/高通 firehose（这些请从你自己的设备获取），补丁与文档的许可见 `NOTICE.md`。
 
 这个项目大概率要几周甚至更久，但方向已经通了。欢迎一起来填坑：
@@ -44,7 +44,7 @@
 
 两天修掉五个死点：loader 的 MPIDR 映射错误、内核无串口时用 logdump + checkpoint 二分、**SDM845 上 PPI27 是 Group0 安全中断而 CNTP 被 hypervisor 拦截导致定时器根本不来**（最后改用设备树里的内存映射定时器 + SPI 38 解决）、fastboot 大文件写入静默损坏（改 EDL 校验写入）等。
 
-工具、补丁、调试方法、真机日志全部开源：`<REPO_URL>`
+工具、补丁、调试方法、真机日志全部开源：`https://github.com/RisanYu/r1-hakios-port`
 下一步：上屏、触摸、UFS、iOS 用户态，然后才是图形界面。路还长，欢迎一起搞。
 
 ---
@@ -62,5 +62,5 @@ Five blockers were solved in two days:
 4. Fix: drive the real-time clock from the **memory-mapped timer** block (`0x17C90000` / frame 0 `0x17CA0000`) with **SPI 38** as the tick interrupt.
 5. `fastboot flash` silently corrupts large images (use EDL firehose writes with read-back verification); `fastboot boot` needs an Android boot **v0 / page_size 4096** image.
 
-Everything (tools, patches, debugging method, sanitized device logs) is open source: `<REPO_URL>`.
+Everything (tools, patches, debugging method, sanitized device logs) is open source: `https://github.com/RisanYu/r1-hakios-port`.
 Next: panel bring-up, touch (Synaptics TCM), UFS storage, then the iOS 16.5 userland (reusing the dipper Mesa/freedreno A630 work) and finally a GUI. Contributions welcome.
