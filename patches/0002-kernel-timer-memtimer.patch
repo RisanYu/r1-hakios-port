@@ -1,0 +1,190 @@
+--- a/osfmk/arm64/machine_routines.c
++++ b/osfmk/arm64/machine_routines.c
+@@ -2196,6 +2196,136 @@
+ }
+ 
+ /*
++ * trident bring-up: the real-time clock runs on the memory-mapped timer frame.
++ *
++ * The EL1 virtual timer's interrupt is PPI 27, which on this phone is a Group 0
++ * (secure) interrupt: this Non-secure kernel can neither change its group nor
++ * receive it, so the architected timer's condition is met and no interrupt ever
++ * arrives. The memory-mapped timer block at 0x17c90000 (arm,armv7-timer-mem) has a
++ * frame 0 at 0x17ca0000 with its own comparators, and their interrupts are SPIs -
++ * which the distributor routes to us. Frame 0's virtual comparator becomes the
++ * tick source; the timebase itself (CNTVCT) stays the same system counter.
++ */
++#define MT_FRAME_BASE           0x17ca0000ull
++#define MT_CNTPCT               0x00
++#define MT_CNTVCT               0x08
++#define MT_CNTP_CVAL            0x20
++#define MT_CNTP_CTL             0x2c
++#define MT_CNTV_CVAL            0x30
++#define MT_CNTV_CTL             0x3c
++#define MT_CNTV_CTL_ISTATUS     0x4             /* read-only */
++#define MT_INTID_VTIMER         38              /* SPI 6 of frame 0: 6 + 32 */
++
++extern kern_return_t gic_v3_spi_attach(uint32_t intid, boolean_t edge,
++    void (*handler)(void *context, uint32_t intid), void *context);
++extern void loader_log_line(const char *text);
++
++static vm_offset_t arm_timer_mem_frame;
++static boolean_t arm_timer_mem_ready;
++
++static inline uint32_t
++arm_timer_mem_rd(uint32_t offset)
++{
++	return *(volatile uint32_t *)(arm_timer_mem_frame + offset);
++}
++
++static inline void
++arm_timer_mem_wr(uint32_t offset, uint32_t value)
++{
++	*(volatile uint32_t *)(arm_timer_mem_frame + offset) = value;
++}
++
++static uint64_t
++arm_timer_mem_read64(uint32_t offset)
++{
++	uint32_t hi = arm_timer_mem_rd(offset + 4);
++
++	return ((uint64_t)hi << 32) | arm_timer_mem_rd(offset);
++}
++
++static void
++arm_timer_mem_write64(uint32_t offset, uint64_t value)
++{
++	/* the low half's write latches, so it has to come second */
++	arm_timer_mem_wr(offset + 4, (uint32_t)(value >> 32));
++	arm_timer_mem_wr(offset, (uint32_t)value);
++}
++
++static void
++arm_timer_mem_log(const char *tag, uint64_t value)
++{
++	char line[64];
++	char *p = line;
++	const char *d = "0123456789abcdef";
++
++	while (*tag != 0) {
++		*p++ = *tag++;
++	}
++	for (int i = 15; i >= 0; i--) {
++		*p++ = d[(value >> (i * 4)) & 0xf];
++	}
++	*p++ = '\n';
++	*p = 0;
++	loader_log_line(line);
++}
++
++/* Level-triggered: drop the condition before the interrupt is ended, then tick. */
++static void
++arm_timer_mem_intr(__unused void *context, __unused uint32_t intid)
++{
++	arm_timer_mem_wr(MT_CNTV_CTL, 0);
++	getCpuDatap()->cpu_decrementer = -1;
++	rtclock_intr(TRUE);
++}
++
++static uint32_t
++arm_timer_mem_get_decrementer(void)
++{
++	uint64_t now, cval, left;
++
++	now = arm_timer_mem_read64(MT_CNTVCT);
++	cval = arm_timer_mem_read64(MT_CNTV_CVAL);
++	left = (cval <= now) ? 0 : (cval - now);
++	return (left > 0xffffffffull) ? 0xffffffffu : (uint32_t)left;
++}
++
++static void
++arm_timer_mem_set_decrementer(uint32_t dec_value)
++{
++	uint64_t now = arm_timer_mem_read64(MT_CNTVCT);
++
++	arm_timer_mem_write64(MT_CNTV_CVAL, now + dec_value);
++	arm_timer_mem_wr(MT_CNTV_CTL, 1);       /* enable, interrupt not masked */
++}
++
++static void
++arm_timer_mem_init(void)
++{
++	static boolean_t tried;
++	vm_offset_t frame;
++	kern_return_t kr;
++
++	if (tried) {
++		return;
++	}
++	tried = TRUE;
++	frame = ml_io_map(MT_FRAME_BASE, 0x1000);
++	if (frame == 0) {
++		arm_timer_mem_log("tmem: no frame", 0);
++		return;
++	}
++	arm_timer_mem_frame = frame;
++	kr = gic_v3_spi_attach(MT_INTID_VTIMER, FALSE, arm_timer_mem_intr, NULL);
++	if (kr != KERN_SUCCESS) {
++		arm_timer_mem_frame = 0;
++		arm_timer_mem_log("tmem: no irq", (uint64_t)kr);
++		return;
++	}
++	arm_timer_mem_ready = TRUE;
++	arm_timer_mem_log("tmem: frame", (uint64_t)frame);
++}
++
++/*
+  * Assumes fiq, irq disabled.
+  */
+ void
+@@ -2206,7 +2336,9 @@
+ 	assert(ml_get_interrupts_enabled() == FALSE);
+ 	cdp->cpu_decrementer = dec_value;
+ 
+-	if (cdp->cpu_set_decrementer_func) {
++	if (arm_timer_mem_ready) {
++		arm_timer_mem_set_decrementer(dec_value);
++	} else if (cdp->cpu_set_decrementer_func) {
+ 		cdp->cpu_set_decrementer_func(dec_value);
+ 	} else {
+ 		__builtin_arm_wsr64("CNTV_TVAL_EL0", (uint64_t)dec_value);
+@@ -2325,7 +2457,9 @@
+ 
+ 	assert(ml_get_interrupts_enabled() == FALSE);
+ 
+-	if (cdp->cpu_get_decrementer_func) {
++	if (arm_timer_mem_ready) {
++		dec = arm_timer_mem_get_decrementer();
++	} else if (cdp->cpu_get_decrementer_func) {
+ 		dec = cdp->cpu_get_decrementer_func();
+ 	} else {
+ 		uint64_t wide_val;
+@@ -2341,7 +2475,12 @@
+ boolean_t
+ ml_get_timer_pending(void)
+ {
+-	uint64_t cntv_ctl = __builtin_arm_rsr64("CNTV_CTL_EL0");
++	uint64_t cntv_ctl;
++
++	if (arm_timer_mem_ready) {
++		return ((arm_timer_mem_rd(MT_CNTV_CTL) & MT_CNTV_CTL_ISTATUS) != 0) ? TRUE : FALSE;
++	}
++	cntv_ctl = __builtin_arm_rsr64("CNTV_CTL_EL0");
+ 	return ((cntv_ctl & CNTV_CTL_EL0_ISTATUS) != 0) ? TRUE : FALSE;
+ }
+ 
+@@ -2418,6 +2557,14 @@
+ {
+ 	uint64_t cntvctl = CNTV_CTL_EL0_ENABLE; /* One wants to use 32 bits, but "mrs" prefers it this way */
+ 
++	/*
++	 * trident bring-up: prefer the memory-mapped frame's virtual comparator (SPI 38) over
++	 * the architected PPI 27, which is Group 0 on this phone and never reaches us.
++	 */
++	arm_timer_mem_init();
++	if (arm_timer_mem_ready) {
++		return;
++	}
+ 	__builtin_arm_wsr64("CNTV_CTL_EL0", cntvctl);
+ #if defined(APPLE_ARM64_ARCH_FAMILY)
+ 	/* disable the physical timer as a precaution, as its registers reset to architecturally unknown values */

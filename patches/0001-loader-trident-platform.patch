@@ -1,0 +1,39 @@
+--- a/xnuloader/loader.c
++++ b/xnuloader/loader.c
+@@ -604,8 +604,16 @@
+  * its redistributors at 0x17a60000, eight cores numbered in affinity 1 (shift 8), cores 0-3 the
+  * Cortex-A55s. No UART reaches the outside; the log goes to the logdump partition or the screen.
+  */
+-/* SDM845: four Cortex-A55s at MPIDR 0x000-0x003, four Cortex-A75s at 0x100-0x103. */
+-static const uint64_t trident_cpu_mpidrs[8] = { 0x000, 0x001, 0x002, 0x003, 0x100, 0x101, 0x102, 0x103 };
++/*
++ * The SM845 (sic; this SoC reports its cores as eight single-core clusters: affinity 1 is the
++ * core number) of the Smartisan R1, read from its own device tree (r1-trident/device-tree/cpus):
++ * cpu@0, cpu@100 ... cpu@700, reg = 0x0, 0x100 ... 0x700. The Android DT calls the four
++ * Cortex-A55s 0x000-0x300 and the four Cortex-A75s 0x400-0x700, which is what the hardware
++ * reports in MPIDR_EL1's affinity fields (verified on the phone: MPIDR_EL1 = 0x81000200 for
++ * cpu@200, whose reg is 0x200). A previous list here (0x000-0x003, 0x100-0x103) was wrong: the
++ * kernel then looked up MPIDR 0x200 in a table that only had 0x2 and panicked in cpu_init.
++ */
++static const uint64_t trident_cpu_mpidrs[8] = { 0x000, 0x100, 0x200, 0x300, 0x400, 0x500, 0x600, 0x700 };
+ 
+ static const struct platform platform_trident = {
+ 	.name = "trident", .io_base = 0x00400000, .io_size = 0x3FC00000,
+@@ -2366,6 +2374,17 @@
+ 
+ 	/* the last argument arrives in that core's x0 */
+ 	status = psci_call(PSCI_CPU_ON, mpidr, (uint64_t)(uintptr_t)&other_cpu_entry, (uint64_t)(uintptr_t)&other_cpu_start);
++	if (status < 0 && (mpidr >> PLAT->core_shift) != 0) {
++		/* Some Qualcomm firmwares take a core number, not the MPIDR, as the target: try that
++		 * (the affinity-1 part) before giving up on the core. */
++		uint64_t core = mpidr >> PLAT->core_shift;
++		uint64_t retry = psci_call(PSCI_CPU_ON, core, (uint64_t)(uintptr_t)&other_cpu_entry, (uint64_t)(uintptr_t)&other_cpu_start);
++		print("core %x: the firmware answers %d to the request to start core %x\n", mpidr, (uint64_t)retry, core);
++		if (retry == 0) {
++			status = 0;
++			mpidr = core;
++		}
++	}
+ 
+ 	started = last_pet = last_battery = last_beat_at = READ_SYSREG(CNTVCT_EL0);
+ 	print("core %x: the firmware answers %d to the request to start it\n", mpidr, (uint64_t)status);

@@ -1,0 +1,7 @@
+*.img
+*.elf
+*.bin
+*.efi
+tmp/
+wsl-*.log
+_*/
