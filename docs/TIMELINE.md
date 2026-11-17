@@ -57,3 +57,11 @@
 - 内核启动链已在真机完整跑通（到 launchd 启动阶段）
 - 显示驱动已探测（60Hz 参数算出），面板初始化与上屏未做
 - 触摸、UFS、iOS 用户态、持久化启动：未开始
+
+## 2026-11-17 22:47 — first kernel console on the R1 panel
+
+- loader 增加 `--usb` payload 模式后，可在真机上反复 `oem run` / `oem screenshot` / `upload`
+- `getvar screen` = `1080 2242 4320`；`oem screenshot` + `upload` 抓到面板真实画面
+- 画面显示完整 XNU verbose 日志、`BSD root: md0`、`Hello from user space on Darwin!`、
+  `panic: initproc failed to start`（预期）、栈回溯与 stackshot
+- 证据：`evidence/screen-console-2026-11-17.png`
