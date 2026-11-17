@@ -1,0 +1,206 @@
+== XNULOADER run (usb) ==
+payload entry 'kernel' size e3a4c8
+payload entry 'ramdisk' size 4060
+payload entry 'cmdline' size 4f
+payload entry 'platform' size 8
+payload entry 'usb' size 2
+payload entry 'kernel.ver' size 1f
+kernel va fffffff007004000..fffffff0081ce4c8 entry fffffff00741f4a8
+largest free block f4000000 size 106000000
+phys window f4000000 size 106000000, claim status 0
+kernel loaded at pa f7004000..f81d0000
+ramdisk at pa f81d0000 size 8000
+ufs: unit 0: media 544433781, 29765632 blocks of 4096 (116272 MB), writable, align 8
+ufs: unit 0: GPT header crc right (9d7f9e50), table of 32 entries crc right (efe285f2)
+ufs: unit 1: media 544433781, 1024 blocks of 4096 (4 MB), writable, align 8
+ufs: unit 1: GPT header crc right (1a080a16), table of 32 entries crc right (bfdc6654)
+ufs: unit 2: media 544433781, 1024 blocks of 4096 (4 MB), writable, align 8
+ufs: unit 2: GPT header crc right (43c9c33), table of 32 entries crc right (eef0314c)
+ufs: unit 3: media 544433781, 32768 blocks of 4096 (128 MB), writable, align 8
+ufs: unit 3: GPT header crc right (9b0fce31), table of 32 entries crc right (9d2e0efe)
+ufs: unit 4: media 544433781, 1048576 blocks of 4096 (4096 MB), writable, align 8
+ufs: unit 4: GPT header crc right (cc7e00ee), table of 64 entries crc right (d48bebd1)
+ufs: unit 5: media 544433781, 393216 blocks of 4096 (1536 MB), writable, align 8
+ufs: unit 5: GPT header crc right (d478abb4), table of 32 entries crc right (3f6d82f9)
+ufs: part ssd: lba 6..7, 8 KB
+ufs: part persist: lba 8..8199, 32768 KB
+ufs: part misc: lba 8200..8455, 1024 KB
+ufs: part keystore: lba 8456..8583, 512 KB
+ufs: part frp: lba 8584..8711, 512 KB
+ufs: part system_a: lba 8712..795143, 3145728 KB
+ufs: part system_b: lba 795144..1581575, 3145728 KB
+ufs: part factory: lba 1581576..1582087, 2048 KB
+ufs: part factory_bak: lba 1582088..1582599, 2048 KB
+ufs: part fsg1: lba 1582600..1583111, 2048 KB
+ufs: part fsg2: lba 1583112..1583623, 2048 KB
+ufs: part alterable: lba 1583624..1583879, 1024 KB
+ufs: part klogdump: lba 1583880..1600263, 65536 KB
+ufs: part ramdump: lba 1600264..3828487, 8912896 KB
+ufs: part userdata: lba 3828488..29765626, 103748556 KB
+ufs: userdata sb +0: 00806b00dcc4ad01354c04004f6c140143d86700000000000200000002000000
+ufs: userdata sb +20: 008000000080000000200000e60a000038975b490300ffff53ef010001000000
+ufs: userdata sb +40: ebdd5200000000000000000001000000000000000b000000000100003c000000
+ufs: userdata sb +60: 420200007b000000a7f8a7aed1d94edfa82256debe44b6c90000000000000000
+ufs: userdata sb +80: 00000000000000002f6461746100000000000000000000000000000000000000
+ufs: userdata sb +a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +c0: 0000000000000000000000000000f90300000000000000000000000000000000
+ufs: userdata sb +e0: 0800000000000000000000003f2088cf0dd84d548aa3741a4461213001010000
+ufs: userdata sb +100: 0c00000000000000ebdd52000af3040004000000000000000000000000800000
+ufs: userdata sb +120: 0080d00000800000008000000000d10000000100008000000080d10000800100
+ufs: userdata sb +140: 008000000000d200000000000000002000000000000000000000000020002000
+ufs: userdata sb +160: 0200000000000000000000000000000000000000040000006544f66000000000
+ufs: userdata sb +180: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1c0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1e0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +200: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +220: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +240: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +260: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +280: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +2a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +2c0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +2e0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +300: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +320: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +340: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +360: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +380: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +3a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +3c0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +3e0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb2 +0: 0000100010001000200010000c13740c3e0504000000000000000000fd0bb65c
+ufs: userdata sb2 +20: 010010001100100020021000a0030020000005000000000000000000002044c5
+ufs: part xbl_a: lba 6..901, 3584 KB
+ufs: xbl_a: 3706880 bytes asked for, the partition is smaller
+ufs: part xbl_config_a: lba 902..933, 128 KB
+ufs: part xbl_b: lba 6..901, 3584 KB
+ufs: xbl_b: 3706880 bytes asked for, the partition is smaller
+ufs: part xbl_config_b: lba 902..933, 128 KB
+ufs: part ALIGN_TO_128K_1: lba 6..31, 104 KB
+ufs: part cdt: lba 32..63, 128 KB
+ufs: part ddr: lba 64..319, 1024 KB
+ufs: part aop_a: lba 6..133, 512 KB
+ufs: aop_a: begins 7f 45 4c 46 1 1 1 3 0 0 0 0 0 0 0 0
+ufs: aop_a: fnv f796797436d6dc0b over 208896 bytes, 1 ms
+ufs: part tz_a: lba 134..645, 2048 KB
+ufs: tz_a: 3710976 bytes asked for, the partition is smaller
+ufs: part hyp_a: lba 646..773, 512 KB
+ufs: hyp_a: 3653632 bytes asked for, the partition is smaller
+ufs: part modem_a: lba 774..41733, 163840 KB
+ufs: modem_a: 214265856 bytes asked for, the partition is smaller
+ufs: part bluetooth_a: lba 41734..41989, 1024 KB
+ufs: bluetooth_a: begins eb 3c 90 4d 53 44 4f 53 35 2e 30 0 10 4 1 0
+ufs: bluetooth_a: fnv 992049c2a0c1173f over 503808 bytes, 3 ms
+ufs: part mdtpsecapp_a: lba 41990..43013, 4096 KB
+ufs: part mdtp_a: lba 43014..51205, 32768 KB
+ufs: part abl_a: lba 51206..51461, 1024 KB
+ufs: abl_a: begins 7f 45 4c 46 1 1 1 0 0 0 0 0 0 0 0 0
+ufs: abl_a: fnv 67cf7b9b06b73b2f over 208896 bytes, 1 ms
+ufs: part dsp_a: lba 51462..59653, 32768 KB
+ufs: dsp_a: 67108864 bytes asked for, the partition is smaller
+ufs: part keymaster_a: lba 59654..59781, 512 KB
+ufs: part boot_a: lba 59782..76165, 65536 KB
+ufs: part cmnlib_a: lba 76166..76293, 512 KB
+ufs: part cmnlib64_a: lba 76294..76421, 512 KB
+ufs: part devcfg_a: lba 76422..76453, 128 KB
+ufs: part qupfw_a: lba 76454..76469, 64 KB
+ufs: part vendor_a: lba 76470..415413, 1355776 KB
+ufs: part vbmeta_a: lba 415414..415429, 64 KB
+ufs: part dtbo_a: lba 415430..417477, 8192 KB
+ufs: part storsec_a: lba 417478..417509, 128 KB
+ufs: part ImageFv_a: lba 417510..417765, 1024 KB
+ufs: part aop_b: lba 417766..417893, 512 KB
+ufs: aop_b: begins 7f 45 4c 46 1 1 1 3 0 0 0 0 0 0 0 0
+ufs: aop_b: fnv d077606ccce63f83 over 208896 bytes, 2 ms
+ufs: part tz_b: lba 417894..418405, 2048 KB
+ufs: tz_b: 3710976 bytes asked for, the partition is smaller
+ufs: part hyp_b: lba 418406..418533, 512 KB
+ufs: hyp_b: 3653632 bytes asked for, the partition is smaller
+ufs: part modem_b: lba 418534..459493, 163840 KB
+ufs: modem_b: 214265856 bytes asked for, the partition is smaller
+ufs: part bluetooth_b: lba 459494..459749, 1024 KB
+ufs: bluetooth_b: begins eb 3c 90 4d 53 44 4f 53 35 2e 30 0 10 4 1 0
+ufs: bluetooth_b: fnv a0e5ed41899b6a93 over 503808 bytes, 4 ms
+ufs: part mdtpsecapp_b: lba 459750..460773, 4096 KB
+ufs: part mdtp_b: lba 460774..468965, 32768 KB
+ufs: part abl_b: lba 468966..469221, 1024 KB
+ufs: abl_b: begins 7f 45 4c 46 1 1 1 0 0 0 0 0 0 0 0 0
+ufs: abl_b: fnv 67cf7b9b06b73b2f over 208896 bytes, 1 ms
+ufs: part dsp_b: lba 469222..477413, 32768 KB
+ufs: dsp_b: 67108864 bytes asked for, the partition is smaller
+ufs: part keymaster_b: lba 477414..477541, 512 KB
+ufs: part boot_b: lba 477542..493925, 65536 KB
+ufs: part cmnlib_b: lba 493926..494053, 512 KB
+ufs: part cmnlib64_b: lba 494054..494181, 512 KB
+ufs: part devcfg_b: lba 494182..494213, 128 KB
+ufs: part qupfw_b: lba 494214..494229, 64 KB
+ufs: part vendor_b: lba 494230..833173, 1355776 KB
+ufs: part vbmeta_b: lba 833174..833189, 64 KB
+ufs: part dtbo_b: lba 833190..835237, 8192 KB
+ufs: part storsec_b: lba 835238..835269, 128 KB
+ufs: part ImageFv_b: lba 835270..835525, 1024 KB
+ufs: part sec: lba 835526..835529, 16 KB
+ufs: part devinfo: lba 835530..835530, 4 KB
+ufs: part dip: lba 835531..835786, 1024 KB
+ufs: part apdp: lba 835787..835850, 256 KB
+ufs: part msadp: lba 835851..835914, 256 KB
+ufs: part spunvm: lba 835915..837962, 8192 KB
+ufs: part splash: lba 837963..846318, 33424 KB
+ufs: part limits: lba 846319..846319, 4 KB
+ufs: part toolsfv: lba 846320..846575, 1024 KB
+ufs: part logfs: lba 846576..848623, 8192 KB
+ufs: part sti: lba 848624..849135, 2048 KB
+ufs: part rawdump: lba 849136..881903, 131072 KB
+ufs: part logdump: lba 881904..898287, 65536 KB
+ufs: part ALIGN_TO_128K_2: lba 6..31, 104 KB
+ufs: part modemst1: lba 32..543, 2048 KB
+ufs: part modemst2: lba 544..1055, 2048 KB
+ufs: part fsg: lba 1056..1567, 2048 KB
+ufs: part fsc: lba 1568..1599, 128 KB
+ufs: 6 raw units, 80 partitions
+ufs: firmware table 0: 76b6bdfa-2acd-4462-9e3f-cb58c969d937 at ca33fa48
+ufs: firmware table 1: fc1bcdb0-7d31-49aa-936a-a460d9dd083 at c9d43f18
+ufs: firmware table 2: ee4e5898-3914-4259-9d6e-dc7bd7943cf at c9d47418
+ufs: firmware table 3: 5ad34ba-6f02-4214-952e-4da0398e2bb9 at ca33e130
+ufs: firmware table 4: 7739f24c-93d7-11d4-9a3a-090273fc14d at c9d3f018
+ufs: firmware table 5: 4c19049f-4137-4dd3-9c10-8b97a83ffdfa at ca33ee48
+ufs: firmware table 6: 49152e77-1ada-4764-b7a2-7afefed95e8b at ca342928
+ufs: firmware table 7: b898d8dc-80a-40f7-99e3-31627b806a5a at 74a5fbd6dc0910c7
+ufs: firmware table 8: b1b621d5-f19c-41a5-83b-d9152c69aae0 at c704b018
+ufs: firmware table 9: 8868e871-e4f1-11d3-bc22-080c73c8881 at c7130018
+ufs: firmware table 10: eb9d2d31-2d88-11d3-9a16-090273fc14d at c6350000
+ufs: firmware table 11: f2fd1544-9794-4a2c-992e-e5bbcf20e394 at c6330000
+ufs: firmware table 12: dcfa911d-26eb-469f-a220-38b7dc461220 at c52e2018
+ufs: firmware table 13: ef9fc172-a1b2-4693-b327-6d32fc416042 at c53e0018
+ufs: firmware table 14: 587e72d7-cc50-4f79-829-ca291fc1a1f at ca2ee818
+ufs: unit 0: path 1.4[c145088609be55438bc130d64ff8e63a]
+ufs: unit 1: path 1.4[77d4908da339384aab9e586ff69ed051]
+ufs: unit 2: path 1.4[6858f8edec87774f9cda5f10df2fe601]
+ufs: unit 3: path 1.4[2490e61aeb8af84dbc980032dbdf5024]
+ufs: unit 4: path 1.4[85193fd307f1854abe3868dc7ad32cea]
+ufs: unit 5: path 1.4[5fd0a14b8e083f48a97eb19b9ccf59b0]
+ufs: block service: 80 partitions and 6 units, page a1452000, buffer a156a000 of 4096 KB
+return slot patched at f74207f0, checkpoint 0
+cmdline: 164 of 607 characters
+cores for the kernel, in the order it takes them: 700 100 200 300 400 500 600
+device tree f81d8000 len 38dc, boot_args f81e8000, top f81ec000
+cmdline: debug=0x8 ufs_shared_pa=0x00000000a1452000 hakios_kver=2.3.4-hakios-darwin22.5-sdm845 rd=md0 hv_wdt_pet=1 cpus=1 bootcpu=7 cpufreq=1 ufs=2 -v debug=0x144 keepsyms=1
+this core 0, kernel core 700, more_cores 1
+the kernel will run on core 700 (this is core 0)
+jumping to f741f4a8
+log: 12288 bytes written to logdump (0), read back the same (0)
+core 700: the firmware answers 0 to the request to start it
+log: 12288 bytes written to logdump (0), read back the same (0)
+2 s: the kernel has logged 332 bytes, heartbeat 1; the last of it:
+000000
+tmem: framefffffff1122d0000
+mt1: 01111117 0000003f 0124f800 00000012 00000000 0000000000000000
+mt2: 0000000d 00000000 00000000 00000000 00000000 0000000000000000
+
+Hello from user space on Darwin!
+I am process 1, uid 0, console fd 0.
+
+log: 12288 bytes written to logdump (0), read back the same (0)
+kernel returned: log at f7afc980, 23092 bytes
+log: 36864 bytes written to logdump (0), read back the same (0)
