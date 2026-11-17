@@ -81,3 +81,9 @@ evidence/    真机验证日志（已脱敏）
 ## License
 
 本仓库自己的代码/文档：MIT。涉及 Apple XNU / HakiOS 的补丁部分见 `NOTICE.md`（APSL 2.0）。
+
+## Milestones
+
+| Date | Milestone |
+|---|---|
+| 2026-11-17 22:47 | the XNU console draws on the R1 panel: first on-screen kernel log (loader `oem screenshot` capture, `evidence/screen-console-2026-11-17.png`) |
