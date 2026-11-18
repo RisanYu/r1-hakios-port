@@ -1,3 +1,15 @@
+## 2026-11-18 12:49 iOS 16.5 SpringBoard 主屏幕（证据）
+
+同一颗 timer 内核，加上真正的 Darwin 16.5 用户态（`system.apfs` 作为 resident md0、`root.apfs` 作为 md1 挂在 `/redwood`）后，系统不再在 launchd 阶段 panic：libignition 用真实设备身份跑完，launchd（Darwin Bootstrapper 7.0.0）启动，`backboardd` 起了 window server，SpringBoard 以 pid 8 运行并把主屏幕画到面板上。
+
+- 运行方式：loader `--usb` payload → `fastboot boot` UEFI → loader USB 命令循环 → `oem ramdisk system.apfs`（2.36 GB）→ `oem run`
+- 屏幕内容（`evidence/springboard-home-2026-11-18.png`）：状态栏 8:15 + 电池、Weather/Calendar 小组件、应用图标网格（FaceTime、Calendar、Photos、Mail、Notes、Reminders、Clock、News、TV、Podcasts、App Store、Maps、Health、Wallet、Settings）、Search 胶囊、Dock（Phone/Safari/Messages/Music）
+- 日志证据（`evidence/springboard-log-2026-11-18.txt`）：`Darwin Ignition Sequence ... Version 1.0.0`、`Darwin Bootstrapper 7.0.0`、`Successfully spawned backboardd[13]`、`start window server`、`IOMobileFramebufferCreateDisplayList_block_invoke`、`iomfb_match_callback: primary`、`HID system ready`、`SpringBoard[8]`、`updateOverlay: Dismissing overlay: shell launched`
+- 当前渲染路径是软件渲染（日志 `hakios: SpringBoard: no GPU draws, vibrant views are plain`），GPU 加速（Mesa/freedreno A630）与触摸驱动是下一步
+- 内核跑满 150 秒仍稳定（日志 688 KB），由 loader `oem stop` 主动结束
+
+---
+
 ## 2026-11-17 22:47 内核控制台上屏（证据）
 
 用带 `--usb` 的 payload 让 loader 停在 USB 命令循环，`oem run` 启动内核后在运行期间用
