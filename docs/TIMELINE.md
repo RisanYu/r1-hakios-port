@@ -65,3 +65,13 @@
 - 画面显示完整 XNU verbose 日志、`BSD root: md0`、`Hello from user space on Darwin!`、
   `panic: initproc failed to start`（预期）、栈回溯与 stackshot
 - 证据：`evidence/screen-console-2026-11-17.png`
+
+## 2026-11-18 12:49 — iOS 16.5 SpringBoard 主屏幕出现在 R1 面板上
+
+- 11-17 夜间：Darwin 16.5 用户态镜像构建成功（`root.apfs` 4 MB / `system.apfs` 2.36 GB）
+- 11-18 清晨：GUI payload（timer 内核 + root.apfs 作 md1）首次启动；APFS 根挂载/`devfs`/`/redwood/etc/rc` 全通，卡在 `libignition` 查询 `hw.target`（EINVAL 22）
+- 12:0x：根因是 loader 用占位身份构建（`mkidentity.py --placeholder`）；用 IPSW 的 `DeviceTree.d22ap.im4p` 重建 `identity.h` 并重编 loader（72,192 B）
+- 12:40：UEFI → loader → `oem ramdisk system.apfs`（13.6 MB/s）→ `oem run`；launchd/backboardd/SpringBoard 全部起来
+- 12:49：`guirun 150` 干净图形化运行（去掉 `-v`），`shot-013` 即 iOS 16.5 主屏幕；内核稳定跑满 150 s，日志 688 KB
+- 证据：`evidence/springboard-home-2026-11-18.png`、`evidence/springboard-first-draw-2026-11-18.png`、`evidence/springboard-log-2026-11-18.txt`
+- 仍待解决：触摸（Synaptics TCM）、GPU 加速（Mesa/freedreno A630）、cellular/biometry、持久化启动
