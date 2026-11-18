@@ -87,3 +87,4 @@ evidence/    真机验证日志（已脱敏）
 | Date | Milestone |
 |---|---|
 | 2026-11-17 22:47 | the XNU console draws on the R1 panel: first on-screen kernel log (loader `oem screenshot` capture, `evidence/screen-console-2026-11-17.png`) |
+| 2026-11-18 12:49 | **iOS 16.5 SpringBoard home screen runs on the R1 panel** (real launchd + backboardd window server + software rendering; `evidence/springboard-home-2026-11-18.png`) |
