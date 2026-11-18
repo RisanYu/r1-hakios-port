@@ -1,0 +1,248 @@
+# HakiOS on the Smartisan R1: Darwin 16.5 / SpringBoard run, 2026-11-18 12:49-12:52
+# (excerpt of the kernel log; the full 688 KB log is in the working copy)
+
+## kernel start
+== XNULOADER run (usb) ==
+payload entry 'kernel' size e3a4c8
+payload entry 'ramdisk' size 400000
+payload entry 'cmdline' size 71
+payload entry 'platform' size 8
+payload entry 'usb' size 2
+payload entry 'kernel.ver' size 1f
+kernel va fffffff007004000..fffffff0081ce4c8 entry fffffff00741f4a8
+kernel loaded at pa f7004000..f81d0000
+ramdisk at pa f81d0000 size 400000
+resident image at pa fc000000 size 939fc000: it is the root (md0), the payload ramdisk is md1
+ufs: unit 0: media 544433781, 29765632 blocks of 4096 (116272 MB), writable, align 8
+ufs: unit 0: GPT header crc right (9d7f9e50), table of 32 entries crc right (efe285f2)
+ufs: unit 1: media 544433781, 1024 blocks of 4096 (4 MB), writable, align 8
+ufs: unit 1: GPT header crc right (1a080a16), table of 32 entries crc right (bfdc6654)
+ufs: unit 2: media 544433781, 1024 blocks of 4096 (4 MB), writable, align 8
+ufs: unit 2: GPT header crc right (43c9c33), table of 32 entries crc right (eef0314c)
+ufs: unit 3: media 544433781, 32768 blocks of 4096 (128 MB), writable, align 8
+ufs: unit 3: GPT header crc right (9b0fce31), table of 32 entries crc right (9d2e0efe)
+ufs: unit 4: media 544433781, 1048576 blocks of 4096 (4096 MB), writable, align 8
+ufs: unit 4: GPT header crc right (cc7e00ee), table of 64 entries crc right (d48bebd1)
+ufs: unit 5: media 544433781, 393216 blocks of 4096 (1536 MB), writable, align 8
+ufs: unit 5: GPT header crc right (d478abb4), table of 32 entries crc right (3f6d82f9)
+ufs: part ssd: lba 6..7, 8 KB
+ufs: part persist: lba 8..8199, 32768 KB
+ufs: part misc: lba 8200..8455, 1024 KB
+ufs: part keystore: lba 8456..8583, 512 KB
+ufs: part frp: lba 8584..8711, 512 KB
+ufs: part system_a: lba 8712..795143, 3145728 KB
+ufs: part system_b: lba 795144..1581575, 3145728 KB
+ufs: part factory: lba 1581576..1582087, 2048 KB
+ufs: part factory_bak: lba 1582088..1582599, 2048 KB
+ufs: part fsg1: lba 1582600..1583111, 2048 KB
+ufs: part fsg2: lba 1583112..1583623, 2048 KB
+ufs: part alterable: lba 1583624..1583879, 1024 KB
+ufs: part klogdump: lba 1583880..1600263, 65536 KB
+ufs: part ramdump: lba 1600264..3828487, 8912896 KB
+ufs: part userdata: lba 3828488..29765626, 103748556 KB
+ufs: userdata sb +0: 00806b00dcc4ad01354c04004f6c140143d86700000000000200000002000000
+ufs: userdata sb +20: 008000000080000000200000e60a000038975b490300ffff53ef010001000000
+ufs: userdata sb +40: ebdd5200000000000000000001000000000000000b000000000100003c000000
+ufs: userdata sb +60: 420200007b000000a7f8a7aed1d94edfa82256debe44b6c90000000000000000
+ufs: userdata sb +80: 00000000000000002f6461746100000000000000000000000000000000000000
+ufs: userdata sb +a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +c0: 0000000000000000000000000000f90300000000000000000000000000000000
+ufs: userdata sb +e0: 0800000000000000000000003f2088cf0dd84d548aa3741a4461213001010000
+ufs: userdata sb +100: 0c00000000000000ebdd52000af3040004000000000000000000000000800000
+ufs: userdata sb +120: 0080d00000800000008000000000d10000000100008000000080d10000800100
+ufs: userdata sb +140: 008000000000d200000000000000002000000000000000000000000020002000
+ufs: userdata sb +160: 0200000000000000000000000000000000000000040000006544f66000000000
+ufs: userdata sb +180: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1a0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1c0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +1e0: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +200: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +220: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +240: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +260: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +280: 0000000000000000000000000000000000000000000000000000000000000000
+ufs: userdata sb +2a0: 0000000000000000000000000000000000000000000000000000000000000000
+
+## ignition, launchd, SpringBoard
+hakios: container manager: no personas
+com.apple.xpc.launchd|1970-01-01 08:13:32.273166 (user/501/com.apple.SpringBoard [7]) <Notice>: job state = running
+  -rw-r--r--  1     2337 /redwood/LaunchDaemons/com.apple.SpringBoard.plist
+  etc/motd: Darwin on hakios: image built 2026-11-17 23:50
+init: library insertion: /redwood/lib/libhakios.dylib backboardd containermanagerd containermanagerd_system;/redwood/lib/libhakios.sb.dylib SpringBoard;/redwood/lib/libhakios.media.dylib mediaserverd;/redwood/lib/libhakios.app.dylib Sileo;/redwood/lib/libhakios.tweaks.dylib Preferences
+Darwin Ignition Sequence Version 1.0.0: Mon Apr 24 20:19:10 PDT 2023; root:libignition-51~1538/libignition_core/RELEASE_ARM64
+libignition: 1: arguments           :
+libignition: 1:   ignition level    : 0x5
+libignition: 1:   force dylib root  : 0x0
+libignition: 1:   halt after stage  : n/a
+libignition: 1: ignition blob not available
+libignition: 1: configuration         :
+libignition: 1:   program             : launchd.darwin
+libignition: 1:   os environment      : n/a
+libignition: 1:   rd                  : md0
+libignition: 1:   arp0                : n/a
+libignition: 1:   rp                  : n/a
+libignition: 1:   pivot src           : n/a
+libignition: 1:   root ramdisk        : 0x0
+libignition: 1:   restore             : 0x0
+libignition: 1:   root device info    : 0x0
+libignition: 1:   can haz debugger    : 0x1
+libignition: 1:   rootfs mount flags  : 0x4005001
+libignition: 1:   ecid                : 0x0
+libignition: 1:   hardware target     : d22ap
+libignition: 1:   initproc            : 0x1
+libignition: 1:   single user         : 0x0
+libignition: 1:   userspace reboot    : 0x0
+libignition: 1:   secure boot level   : 0x0
+libignition: 1:   os version          : n/a
+libignition: 1: parameters          :
+libignition: 1:   version           : 0x1
+libignition: 1:   argc              : 0x1
+libignition: 1:   log fd            : 0xffffffffffffffff
+libignition: 1:   platform          : 0x2
+libignition: 1: boot spec           :
+libignition: 1:   name              : ramdisk
+libignition: 1:   stage count       : 0x2
+libignition: 1:        hello: commence primary ignition
+libignition: 1:        hello: hello from launchd.darwin.1
+libignition: 1:      goodbye: ignition sequence complete
+com.apple.xpc.launchd|1970-01-01 08:13:21.254630 <Notice>: Darwin Bootstrapper Version 7.0.0: Mon Apr 17 16:36:10 PDT 2023; root:libxpc_executables-2462.120.4~11/launchd/RELEASE_ARM64
+com.apple.xpc.launchd|1970-01-01 08:13:21.265907 <Notice>: launchd logging initialized. name: com.apple.xpc.launchd pid: 1
+com.apple.xpc.launchd|1970-01-01 08:13:21.362401 (com.apple.SpringBoard) <Error>: Unknown key for plist importer (key: HighPriorityIO type: bool)
+com.apple.xpc.launchd|1970-01-01 08:13:21.362416 (user/501/com.apple.SpringBoard) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 08:13:21.362437 (com.apple.SpringBoard) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 08:13:21.362860 (user/501/com.apple.SpringBoard) <Notice>: service will attempt to elide xpcproxy
+com.apple.xpc.launchd|1970-01-01 08:13:21.449451 (user/501/com.apple.SpringBoard) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 08:13:21.449518 (user/501/com.apple.SpringBoard) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 08:13:21.449521 (user/501/com.apple.SpringBoard) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 08:13:21.449782 (user/501/com.apple.SpringBoard) <Warning>: Skipping remaining service endpoints for importance boosting.
+com.apple.xpc.launchd|1970-01-01 08:13:21.449786 (user/501/com.apple.SpringBoard) <Warning>: Skipping remaining event endpoints for importance boosting.
+com.apple.xpc.launchd|1970-01-01 08:13:21.449789 (user/501/com.apple.SpringBoard) <Warning>: Skipping remaining instance endpoints for importance boosting.
+com.apple.xpc.launchd|1970-01-01 08:13:21.449987 (user/501/com.apple.SpringBoard) <Notice>: launching: system support
+com.apple.xpc.launchd|1970-01-01 08:13:22.611527 (user/501/com.apple.SpringBoard [7]) <Notice>: service spawned with pid 7
+com.apple.xpc.launchd|1970-01-01 08:13:22.611549 (user/501/com.apple.SpringBoard [7]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 08:13:22.611555 (user/501/com.apple.SpringBoard [7]) <Notice>: service state: spawned
+com.apple.xpc.launchd|1970-01-01 08:13:22.611604 (user/501/com.apple.SpringBoard [7]) <Notice>: service state: running
+com.apple.xpc.launchd|1970-01-01 08:13:22.611611 (user/501/com.apple.SpringBoard [7]) <Notice>: internal event: INIT, code = 0
+com.apple.xpc.launchd|1970-01-01 08:13:22.611649 (user/501/com.apple.SpringBoard [7]) <Notice>: Successfully spawned SpringBoard[7] because system support
+com.apple.xpc.launchd|1970-01-01 08:13:22.612333 (pid/7 [SpringBoard]) <Notice>: uncorking exec source upfront
+com.apple.xpc.launchd|1970-01-01 08:13:22.612371 (pid/7 [SpringBoard]) <Notice>: created
+com.apple.xpc.launchd|1970-01-01 08:13:22.895115 (user/501/com.apple.SpringBoard [7]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+hakios: display links: made ok, fps ok, range ok; UIViewInProcessAnimationManager's at the panel's rate (dl_max=1)
+hakios: SpringBoard: no GPU draws, vibrant views are plain (the lock screen's clock is white)
+hakios: SpringBoard: the status bar's providers have NSObject in common, the fallback's parent is NSObject
+hakios: SpringBoard: the status bar's fallback provider is _UIStatusBarVisualProvider_Split1125 from now on (35 class methods)
+hakios: SpringBoard: activation answered here, setup assistant refused, application snapshots as JPEG, the side button's long press checked, battery level from QG, battery state from QG, poster switcher not offered
+hakios: cellular: _UIStatusBarDataCellularEntry has no such method
+hakios: cellular: _UIStatusBarData has no such method
+hakios: cellular: _UIStatusBarDataEntry has no such method
+hakios: cellular: the kernel says up=-1 registered=-1 bars=-1 dbm=-1 radio=-1
+hakios: cellular: -[_UIStatusBarCellularSignalView setSignalMode:] replaced (types "v24@0:8q16"): active while the kernel says registered
+hakios: cellular: -[SBStatusBarStateAggregator _updateServiceItem:withData:SIMInfo:otherSIMInfo:serviceStringGetter:serviceStringSetter:serviceCrossfadeStringGetter:serviceCrossfadeStringSetter:serviceContentTypeGetter:serviceContentTypeSetter:serviceBadgeStringGetter:serviceBadgeStringSetter:] at 0x1c5043d54, types "v108@0:8i16@20@28@36@?44@?52@?60@?68@?76@?84@?92@?100": looked at
+hakios: cellular: -[SBStatusBarStateAggregator _updateSignalStrengthItem:withData:SIMInfo:barsGetter:barsSetter:] at 0x1c5043430, types "v52@0:8i16@20@28@?36@?44": replaced
+hakios: cellular: aggregator methods: cache:didUpdateActiveAudioRoute: endCoalescentBlock systemApertureChargingElementAssertion _notifyNonItemDataChanged displayReferenceModeStatusDidChangeForDisplayWithConfiguration:newStatus: _updateAirplaneMode cache:didUpdatePickableRoutes: _requestActions: centralManagerDidUpdateState: _updateOverrideDate setBatteryChargingState: _updateBluetoothBatteryItem controller:didChangeOverrideDateFromDate: setBatteryDomain: systemApertureLayoutDidChange: _updateSensorActivityItem _updateSecondaryServiceItem _updateStatusBarItemsWithRelatedSystemApertureElements beginCoalescentBlock _updateActiveAudioRecordingStatusBarStyleOverrideAssertionsForActiveSensorActivityAttributions: batteryDomain _updatePersonNameItem _registerForNotifications _updateSignalStrengthItem:withData:SIMInfo:barsGetter:barsSetter: wifiDataProvider initWithMainDisplayWindowScene: dealloc setShouldShowBluetoothHeadphoneGlyph:andShouldShowBluetoothHeadphoneBatteryPercent: _setTelephonyManager: _updateStewieItem airPlayDomain setWifiDomain: 
+hakios: cellular: aggregator methods: _updateSecondaryDataNetworkItem focusDomain setPlaygroundsDomain: _statusBarData systemApertureVisibleElementIdentifiers _updateStatusBarForSystemStatusDomainName:data: _notifyItemChanged: setAlarmEnabled: _tickRefCount:up:withTransitionBlock: _locationAttributionsForSensorActivityAttributions:includeRecent: _resetTimeItemFormatter setFocusDomain: _setItem:enabled:inList:itemPostState: _updateCallForwardingItem:withInfo: batteryChargingState _updateDisplayWarningItem setAirPlayDomain: _removeAirPlayStatusBarStyleOverrideAssertion _telephonyManager setShowsOverridesForRecording: _removeStewieStatusBarStyleOverrideAssertion _updateStatusBarStyleOverrideAssertionsForSystemStatusDomain:andData: _updateBluetoothItem _noteAirplaneModeChanged mainDisplayWindowScene _updateDataNetworkItem _updateRotationLockItem setSystemApertureVisibleElementIdentifiers: setShowsActivityIndicatorOnHomeScreen: addPostingObserver: _updateCarPlayItem initWithMainDisplayWindowScene:registerForNotifications: _updateAirplayItem 
+hakios: cellular: aggregator methods: _updateTimeItems setSystemApertureChargingElementAssertion: telephonyDomain callingDomain _removeTetheringStatusBarStyleOverrideAssertion _activeAudioRecordingAttributionsForSensorActivityAttributions: updateStatusBarItem: _updateLocationItem _updateThermalColorItem _updateServiceItem _updateSecondaryCallForwardingItem _updateBluetoothHeadphonesItem wifiDomain _removePlaygroundsStatusBarStyleOverrideAssertion stewieDomain setUserNameOverride: _systemApertureElementIsVisibleForStatusBarItem: _shouldShowPersonName _updateVoiceControlItem setVoiceControlDomain: _updateVPNItem setShowsSyncActivityIndicator: _systemApertureElementIdentifierForStatusBarItem: _setUserSessionController: _statusBarStyleOverrideDescriptorsForCallDescriptors: _updateCallForwardingItem _stopTimeItemTimer _updateLocationItemForLocationAttributions: removePostingObserver: telephonyDataProvider setCallingDomain: _updateTTYItem _updateLockItem .cxx_destruct _restartTimeItemTimer setStewieDomain: batteryDataProvider 
+hakios: cellular: aggregator methods: _statusBarBatteryStateForSystemStatusChargingState: playgroundsDomain _setItem:enabled: voiceControlDomain _updateBatteryItems _updateActivityItem _temporarilyOverrideLocationItemForProminentIndication _updateAlarmItem _updateLiquidDetectionItem sendStatusBarActions: _updateCallingStatusBarStyleOverrideAssertionsForCallDescriptors: _updateServiceItem:withData:SIMInfo:otherSIMInfo:serviceStringGetter:serviceStringSetter:serviceCrossfadeStringGetter:serviceCrossfadeStringSetter:serviceContentTypeGetter:serviceContentTypeSetter:serviceBadgeStringGetter:serviceBadgeStringSetter: _updateDataNetworkItem:withData:primary:dataNetworkTypeGetter:dataNetworkTypeSetter: activityDidChangeForSensorActivityDataProvider: _userSessionController centralManager:didUpdatePeripheralConnectionState: _updateSignalStrengthItem _updateTetheringState _updateStateAtomicallyWithoutAnimationUsingBlock: _updateQuietModeItem _invalidateSystemApertureChargingElementAssertionForReason: _updateSecondarySignalStrengthItem 
+hakios: cellular: aggregator methods: _postItem:withState:inList: setTelephonyDomain: setShowsActivityIndicatorEverywhere: _shouldShowEmergencyOnlyStatusForInfo: 
+hakios: battery UI: shows% ok, set-shows% ok, bolt ok, chargePercent ok, setChargePercent ok, lockscreen ring ok
+hakios: container manager: no personas
+    7 ??         0:02.12 /System/Library/CoreServices/SpringBoard.app/SpringBoard
+hakios: window server hooks installed
+1970-01-01 08:13:27.877811+0800 backboardd[13:230] [Common] starting /usr/libexec/backboardd...
+1970-01-01 08:13:27.880118+0800 backboardd[13:230] [Common] start prewarm oscard where available...
+1970-01-01 08:13:27.881747+0800 backboardd[13:230] [Common]       prewarm oscard where available ready in 0.00102203s. overall 0.00157557s
+1970-01-01 08:13:27.881840+0800 backboardd[13:230] [Common] start CoreAccessories...
+1970-01-01 08:13:27.907033+0800 backboardd[13:230] [Common]       CoreAccessories ready in 0.0250937s. overall 0.0274023s
+1970-01-01 08:13:27.942936+0800 backboardd[13:230] [Common] start HID system...
+1970-01-01 08:13:27.943199+0800 backboardd[13:230] [Common] start HID system open...
+1970-01-01 08:13:28.241587+0800 backboardd[13:230] [Common]       HID system open ready in 0.298358s. overall 0.362027s
+1970-01-01 08:13:28.241888+0800 backboardd[13:230] [Common] start HID system start...
+1970-01-01 08:13:28.273434+0800 backboardd[13:230] [Common]       HID system start ready in 0.0314879s. overall 0.393846s
+1970-01-01 08:13:28.273692+0800 backboardd[13:230] [Common]       HID system ready in 0.330816s. overall 0.394161s
+1970-01-01 08:13:28.273726+0800 backboardd[13:230] [Common] start GS...
+1970-01-01 08:13:28.276157+0800 backboardd[13:230] [Common]       GS ready in 0.00240271s. overall 0.396599s
+1970-01-01 08:13:28.276545+0800 backboardd[13:230] [Common] start window server...
+hakios: input: the event server asks for property "Hidden", which we do not have
+hakios: input: the event server asks for property "QueueSize", which we do not have
+hakios: input: the event server asks for property "ReportInterval", which we do not have
+hakios: input: the event server asks for property "BatchInterval", which we do not have
+hakios: input: the event server asks for property "ProtectedAccess", which we do not have
+hakios: input: the event server asks for property "SensorPropertySupported", which we do not have
+hakios: input: the event server asks for property "PressCountTrackingEnabled", which we do not have
+hakios: input: the event server asks for property "PressCountUsagePairs", which we do not have
+hakios: input: the event server asks for property "PressCountDoublePressTimeout", which we do not have
+hakios: input: the event server asks for property "PressCountTriplePressTimeout", which we do not have
+hakios: input: the event server asks for property "LongPressTimeout", which we do not have
+hakios: input: the event server asks for property "AlternateLongPressHandling", which we do not have
+hakios: input: the event server asks for property "TapTrackingEnabled", which we do not have
+hakios: input: the event server asks for property "DoubleTapTimeout", which we do not have
+hakios: input: the event server asks for property "TripleTapTimeout", which we do not have
+hakios: input: the event server sets "MotionEventRestricted" = <CFBoolean 0x1df8e98a0 [0x1df66c180]>{value = false}
+hakios: input: the event server sets "LogLevel" = <CFNumber 0xa0df2263b937f918 [0x1df66c180]>{value = +6, type = kCFNumberSInt64Type}
+hakios: input: the event server sets "DeviceOpenedByEventSystem" = <CFBoolean 0x1df8e98b0 [0x1df66c180]>{value = true}
+hakios: input: the event server asks for property "DisplayIntegrated", which we do not have
+hakios: input: the event server asks for property "HIDRestoreKBDState", which we do not have
+hakios: input: the event server asks for property "LocationID", which we do not have
+hakios: input: the event server asks for property "HIDSubinterfaceID", which we do not have
+
+## the end of the run (the system was still up; it was stopped from the loader)
+com.apple.xpc.launchd|1970-01-01 08:15:50.170820 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: service state: spawned
+com.apple.xpc.launchd|1970-01-01 08:15:50.170881 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: service state: running
+com.apple.xpc.launchd|1970-01-01 08:15:50.170941 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: internal event: INIT, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.170952 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: job state = running
+com.apple.xpc.launchd|1970-01-01 08:15:50.171171 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: Successfully spawned PhotosReliveWidget[126] because launch job demand
+com.apple.xpc.launchd|1970-01-01 08:15:50.171281 (pid/48/com.apple.mobileslideshow.PhotosReliveWidget.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [126]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.384837 (pid/125 [WeatherWidget]) <Notice>: uncorking exec source upfront
+com.apple.xpc.launchd|1970-01-01 08:15:50.384918 (pid/125 [WeatherWidget]) <Notice>: created
+com.apple.xpc.launchd|1970-01-01 08:15:50.405434 <Notice>: Flushed 25 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 08:15:50.579275 (pid/48/com.apple.Music.MusicWidgets) <Notice>: created the implicit endpoint upfront
+com.apple.xpc.launchd|1970-01-01 08:15:50.579879 (pid/48/com.apple.Music.MusicWidgets) <Notice>: service will attempt to elide xpcproxy
+com.apple.xpc.launchd|1970-01-01 08:15:50.579902 (pid/48/com.apple.Music.MusicWidgets) <Notice>: draining messages from com.apple.Music.MusicWidgets
+com.apple.xpc.launchd|1970-01-01 08:15:50.579913 (pid/48/com.apple.Music.MusicWidgets) <Notice>: draining messages from com.apple.Music.MusicWidgets.apple-extension-service
+com.apple.xpc.launchd|1970-01-01 08:15:50.587242 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service will attempt to elide xpcproxy
+com.apple.xpc.launchd|1970-01-01 08:15:50.588377 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.588419 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 08:15:50.588430 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 08:15:50.588685 <Warning>: kpersona_find_by_type() failed with ret -1 errno 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:50.588699 (pid/48 [chronod]) <Error>: Unable to find persona with type 6: 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:50.588717 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: launching: launch job demand
+com.apple.xpc.launchd|1970-01-01 08:15:50.588767 <Warning>: kpersona_find_by_type() failed with ret -1 errno 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:50.588771 (pid/48 [chronod]) <Error>: Unable to find persona with type 6: 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:50.594475 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: service spawned with pid 127
+com.apple.xpc.launchd|1970-01-01 08:15:50.594554 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.594571 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: service state: spawned
+com.apple.xpc.launchd|1970-01-01 08:15:50.594627 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: service state: running
+com.apple.xpc.launchd|1970-01-01 08:15:50.594675 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: internal event: INIT, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.594683 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: job state = running
+com.apple.xpc.launchd|1970-01-01 08:15:50.594770 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: Successfully spawned MusicWidgets[127] because launch job demand
+com.apple.xpc.launchd|1970-01-01 08:15:50.594817 (pid/48/com.apple.Music.MusicWidgets.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [127]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:50.705010 <Notice>: Flushed 21 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 08:15:51.091568 (user/501/com.apple.dasd [68]) <Notice>: job state = running
+com.apple.xpc.launchd|1970-01-01 08:15:51.105904 (user/501) <Warning>: failed lookup: name = com.apple.commcenter.xpc, flags = 0x8, requestor = SpringBoard[7], error = 3: No such process
+com.apple.xpc.launchd|1970-01-01 08:15:51.608362 <Notice>: Last log repeated 1 times
+com.apple.xpc.launchd|1970-01-01 08:15:51.579873 (pid/48/com.apple.tips.TipsSwift) <Notice>: created the implicit endpoint upfront
+com.apple.xpc.launchd|1970-01-01 08:15:51.580362 (pid/48/com.apple.tips.TipsSwift) <Notice>: service will attempt to elide xpcproxy
+com.apple.xpc.launchd|1970-01-01 08:15:51.580376 (pid/48/com.apple.tips.TipsSwift) <Notice>: draining messages from com.apple.tips.TipsSwift
+com.apple.xpc.launchd|1970-01-01 08:15:51.580387 (pid/48/com.apple.tips.TipsSwift) <Notice>: draining messages from com.apple.tips.TipsSwift.apple-extension-service
+com.apple.xpc.launchd|1970-01-01 08:15:51.581479 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service will attempt to elide xpcproxy
+com.apple.xpc.launchd|1970-01-01 08:15:51.581804 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:51.581823 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 08:15:51.581829 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 08:15:51.582070 <Warning>: kpersona_find_by_type() failed with ret -1 errno 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:51.582081 (pid/48 [chronod]) <Error>: Unable to find persona with type 6: 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:51.582094 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3) <Notice>: launching: launch job demand
+com.apple.xpc.launchd|1970-01-01 08:15:51.582136 <Warning>: kpersona_find_by_type() failed with ret -1 errno 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:51.582139 (pid/48 [chronod]) <Error>: Unable to find persona with type 6: 3 - No such process
+com.apple.xpc.launchd|1970-01-01 08:15:51.587332 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: service spawned with pid 128
+com.apple.xpc.launchd|1970-01-01 08:15:51.587398 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:51.587416 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: service state: spawned
+com.apple.xpc.launchd|1970-01-01 08:15:51.587462 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: service state: running
+com.apple.xpc.launchd|1970-01-01 08:15:51.587515 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: internal event: INIT, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:51.587523 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: job state = running
+com.apple.xpc.launchd|1970-01-01 08:15:51.587575 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: Successfully spawned TipsWidget[128] because launch job demand
+com.apple.xpc.launchd|1970-01-01 08:15:51.587594 (pid/48/com.apple.tips.TipsSwift.CE70C656-F22A-4C08-A4BB-2EBB9EDF98C3 [128]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 08:15:51.609348 <Notice>: Flushed 21 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 08:15:52.112506 (user/501) <Warning>: failed lookup: name = com.apple.commcenter.xpc, flags = 0x8, requestor = SpringBoard[7], error = 3: No such process
+com.apple.xpc.launchd|1970-01-01 08:15:52.338686 <Notice>: Last log repeated 1 times
+com.apple.xpc.launchd|1970-01-01 08:15:52.212856 (pid/126 [PhotosReliveWid]) <Notice>: uncorking exec source upfront
+com.apple.xpc.launchd|1970-01-01 08:15:52.212938 (pid/126 [PhotosReliveWid]) <Notice>: created
